@@ -1,0 +1,52 @@
+<view class="page">
+
+  <view class="title">隐私政策</view>
+  <view class="meta">更新日期：2026 年 10 月</view>
+
+  <view class="sec">
+    <view class="h">一、我们收集什么</view>
+    <view class="p">只收集你主动填写的内容：</view>
+    <view class="p">· 你拍摄或从相册选择的衣物照片；</view>
+    <view class="p">· 你选择的品类与季节；</view>
+    <view class="p">· 你填写的名称与价格（可以不填）。</view>
+    <view class="p">我们不会收集你的通讯录、位置、聊天记录或任何与衣橱无关的信息。</view>
+  </view>
+
+  <view class="sec">
+    <view class="h">二、数据存在哪里</view>
+    <view class="p">照片和文字存储在本小程序绑定的微信云开发环境中（由腾讯云提供），位于中国境内。每条记录通过微信分配的匿名标识（openid）与你的账号关联，我们不知道你的真实姓名。</view>
+  </view>
+
+  <view class="sec">
+    <view class="h">三、谁能看到</view>
+    <view class="p">只有你。数据库权限设置为「仅创建者可读写」，任何其他用户（包括其他登录用户）都无法读取你的衣物记录与照片。</view>
+    <view class="p">开发者不会主动查看你的衣物照片。</view>
+  </view>
+
+  <view class="sec">
+    <view class="h">四、相机与相册权限</view>
+    <view class="p">仅在你自己点击「添加照片」时调用，用于拍摄或选择衣物图片。不会在后台调用，也不会自动上传。</view>
+  </view>
+
+  <view class="sec">
+    <view class="h">五、你的权利</view>
+    <view class="p">你可以随时编辑或删除任意一件衣物。删除后，对应的照片会一并从云存储中移除，无法恢复。</view>
+    <view class="p">如需删除全部数据，可逐件删除，或通过下方联系方式告知。</view>
+  </view>
+
+  <view class="sec">
+    <view class="h">六、我们不做的事</view>
+    <view class="p">· 不出售、不出租、不向第三方共享你的数据；</view>
+    <view class="p">· 不将你的照片用于模型训练；</view>
+    <view class="p">· 不发送营销推送；</view>
+    <view class="p">· 不接入广告 SDK。</view>
+  </view>
+
+  <view class="sec">
+    <view class="h">七、联系</view>
+    <view class="p">如对本政策有疑问，可通过小程序内的反馈渠道联系开发者。</view>
+  </view>
+
+  <view class="foot-note">本政策适用于「线上衣橱」小程序全部功能。</view>
+
+</view>

@@ -1,0 +1,68 @@
+<view class="page">
+
+  <!-- 顶部标题 -->
+  <view class="hero">
+    <view class="hero-eyebrow">MY WARDROBE</view>
+    <view class="hero-title">我的衣橱</view>
+    <view class="hero-sub">{{total}} 件衣物<text wx:if="{{total > 0}}"> · 一件件攒起来的</text></view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="cats" scroll-x="{{true}}" enable-flex="{{true}}">
+    <view class="cat {{activeCat === 'all' ? 'on' : ''}}" data-k="all" bindtap="onCat">全部</view>
+    <view
+      wx:for="{{categories}}"
+      wx:key="key"
+      class="cat {{activeCat === item.key ? 'on' : ''}}"
+      data-k="{{item.key}}"
+      bindtap="onCat"
+    >{{item.name}}</view>
+  </scroll-view>
+
+  <!-- 首屏骨架 -->
+  <view wx:if="{{!ready}}" class="grid">
+    <view class="skel" wx:for="{{[1,2,3,4]}}" wx:key="*this"></view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{ready && !loadingMore && list.length === 0}}" class="empty">
+    <view class="empty-mark">衣</view>
+    <view class="empty-title">{{activeCat === 'all' ? '衣橱还是空的' : '这个分类还没有衣物'}}</view>
+    <view class="empty-desc">
+      {{activeCat === 'all' ? '先录五件最常穿的，不用一次录完' : '换一个分类看看，或者添加一件'}}
+    </view>
+    <view class="empty-btn" bindtap="goAdd">添加衣物</view>
+  </view>
+
+  <!-- 衣物网格 -->
+  <view wx:else class="grid">
+    <view
+      class="item"
+      wx:for="{{list}}"
+      wx:key="_id"
+      data-id="{{item._id}}"
+      bindtap="goDetail"
+      hover-class="item-hover"
+      hover-stay-time="80"
+    >
+      <view class="item-img-wrap">
+        <image class="item-img" src="{{item.cover}}" mode="aspectFill" lazy-load="{{true}}" />
+        <view class="item-price" wx:if="{{item.priceText}}">{{item.priceText}}</view>
+      </view>
+      <view class="item-title">{{item.title}}</view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loadmore" wx:if="{{list.length > 0}}">
+    <text wx:if="{{loadingMore}}">正在加载…</text>
+    <text wx:elif="{{!hasMore}}">— 已经到底了 —</text>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="fab" bindtap="goAdd" hover-class="fab-hover">
+    <view class="fab-bar fab-bar-h"></view>
+    <view class="fab-bar fab-bar-v"></view>
+  </view>
+
+</view>

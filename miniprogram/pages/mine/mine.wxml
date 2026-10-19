@@ -1,0 +1,45 @@
+<view class="page">
+
+  <view class="profile">
+    <view class="avatar">衣</view>
+    <view class="pname">我的衣橱</view>
+    <view class="pdesc">一个只属于你的私人衣橱</view>
+  </view>
+
+  <view class="stats">
+    <view class="stat">
+      <view class="sv">{{loading ? '—' : count}}</view>
+      <view class="sl">件衣物</view>
+    </view>
+    <view class="stat-line"></view>
+    <view class="stat">
+      <view class="sv"><text class="sv-yen">¥</text>{{loading ? '—' : valueText}}</view>
+      <view class="sl">总价值</view>
+    </view>
+    <view class="stat-line"></view>
+    <view class="stat">
+      <view class="sv">{{loading ? '—' : catCount}}</view>
+      <view class="sl">个品类</view>
+    </view>
+  </view>
+
+  <view class="capped" wx:if="{{capped}}">总价值按最近 100 件估算</view>
+
+  <view class="menu">
+    <view class="menu-item" bindtap="goPrivacy" hover-class="menu-hover">
+      <text class="menu-label">隐私政策</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="onAbout" hover-class="menu-hover">
+      <text class="menu-label">关于</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="note">
+    照片与信息保存在你自己的云开发环境中，只有你能看到。
+  </view>
+
+  <view class="version">v1.0.0 · 练手项目</view>
+
+</view>

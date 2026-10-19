@@ -1,0 +1,226 @@
+.page {
+  min-height: 100vh;
+  padding: 28rpx 24rpx 240rpx;
+  box-sizing: border-box;
+}
+
+/* ---------- 区块 ---------- */
+.block {
+  background: #FFFFFF;
+  border: 1rpx solid var(--line);
+  border-radius: 16rpx;
+  padding: 28rpx 26rpx;
+  margin-bottom: 22rpx;
+}
+
+.block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 22rpx;
+}
+
+.block-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: .5rpx;
+}
+
+.block-hint {
+  font-size: 22rpx;
+  color: var(--ink3);
+}
+
+.block-hint.required {
+  color: var(--clay);
+}
+
+.block-foot {
+  margin-top: 18rpx;
+  font-size: 22rpx;
+  color: var(--ink3);
+}
+
+/* ---------- 照片 ---------- */
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.photo {
+  position: relative;
+  width: 204rpx;
+  height: 204rpx;
+  margin-right: 18rpx;
+  margin-bottom: 18rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #EDEBE4;
+}
+
+.photo:nth-child(3n) {
+  margin-right: 0;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.photo-del {
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(27, 27, 24, .55);
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.photo-add {
+  position: relative;
+  width: 204rpx;
+  height: 204rpx;
+  margin-bottom: 18rpx;
+  border-radius: 12rpx;
+  background: #FAF9F5;
+  border: 1rpx dashed #D6D3C8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-add-hover {
+  background: #F2F0E9;
+}
+
+.add-bar {
+  position: absolute;
+  background: #A8A597;
+  border-radius: 3rpx;
+}
+
+.add-bar-h {
+  width: 40rpx;
+  height: 3rpx;
+}
+
+.add-bar-v {
+  width: 3rpx;
+  height: 40rpx;
+}
+
+/* ---------- 选项 ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 12rpx 30rpx;
+  margin-right: 14rpx;
+  margin-bottom: 14rpx;
+  border-radius: 99rpx;
+  font-size: 25rpx;
+  color: var(--ink2);
+  background: #FAF9F5;
+  border: 1rpx solid var(--line);
+  line-height: 1.5;
+}
+
+.chip.on {
+  background: #4E6144;
+  border-color: #4E6144;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* ---------- 输入行 ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  min-height: 88rpx;
+}
+
+.row-label {
+  width: 110rpx;
+  font-size: 27rpx;
+  color: var(--ink);
+  flex: none;
+}
+
+.row-input {
+  flex: 1;
+  font-size: 27rpx;
+  color: var(--ink);
+  height: 60rpx;
+}
+
+.ph {
+  color: #B6B3A8;
+}
+
+.row-price {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.yen {
+  font-size: 26rpx;
+  color: var(--ink3);
+  margin-right: 8rpx;
+}
+
+.row-divider {
+  height: 1rpx;
+  background: var(--line-soft);
+}
+
+/* ---------- 提示 ---------- */
+.tips {
+  padding: 8rpx 6rpx;
+  font-size: 22rpx;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+
+/* ---------- 底部按钮 ---------- */
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: rgba(247, 246, 242, .96);
+  border-top: 1rpx solid var(--line);
+  z-index: 30;
+}
+
+.save-btn {
+  width: 100%;
+  height: 92rpx;
+  line-height: 92rpx;
+  border-radius: 12rpx;
+  background: #4E6144;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 500;
+  letter-spacing: 2rpx;
+  border: none;
+}
+
+.save-btn::after {
+  border: none;
+}
+
+.save-btn.disabled {
+  background: #C9CFC3;
+  color: #F2F4EF;
+}

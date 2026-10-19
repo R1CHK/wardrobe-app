@@ -1,0 +1,64 @@
+<view wx:if="{{loading}}" class="state">
+  <view class="state-text">加载中…</view>
+</view>
+
+<view wx:elif="{{error}}" class="state">
+  <view class="state-mark">空</view>
+  <view class="state-text">{{error}}</view>
+  <view class="state-btn" bindtap="onBack">返回衣橱</view>
+</view>
+
+<view wx:else class="page">
+
+  <!-- 图片 -->
+  <swiper
+    class="gallery"
+    circular="{{item.images.length > 1}}"
+    indicator-dots="{{item.images.length > 1}}"
+    indicator-color="rgba(255,255,255,.45)"
+    indicator-active-color="#ffffff"
+  >
+    <swiper-item wx:for="{{item.images}}" wx:for-item="img" wx:key="*this">
+      <image
+        class="gallery-img"
+        src="{{img}}"
+        mode="aspectFill"
+        data-i="{{index}}"
+        bindtap="onPreview"
+      />
+    </swiper-item>
+  </swiper>
+
+  <!-- 信息 -->
+  <view class="body">
+    <view class="title-row">
+      <view class="title">{{item.name || catName}}</view>
+      <view class="price" wx:if="{{item.price}}"><text class="price-yen">¥</text>{{item.price}}</view>
+    </view>
+
+    <view class="rows">
+      <view class="row">
+        <text class="k">品类</text>
+        <text class="v">{{catName}}</text>
+      </view>
+      <view class="row">
+        <text class="k">季节</text>
+        <text class="v {{seasonText ? '' : 'placeholder'}}">{{seasonText || '未标注'}}</text>
+      </view>
+      <view class="row">
+        <text class="k">价格</text>
+        <text class="v {{item.price ? '' : 'placeholder'}}">{{item.price ? '¥' + item.price + ' 元' : '未填写'}}</text>
+      </view>
+      <view class="row">
+        <text class="k">录入时间</text>
+        <text class="v">{{dateText}}</text>
+      </view>
+    </view>
+
+    <view class="actions">
+      <view class="act act-edit" bindtap="onEdit" hover-class="act-hover">编辑</view>
+      <view class="act act-del" bindtap="onDelete" hover-class="act-hover">删除</view>
+    </view>
+  </view>
+
+</view>

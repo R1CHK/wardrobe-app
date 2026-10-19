@@ -1,0 +1,14 @@
+# 统一换行符，避免 Windows 与 macOS 协作时产生无意义的整文件 diff
+* text=auto eol=lf
+
+# 二进制资源不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# 小程序与脚本按文本处理
+*.wxml text
+*.wxss text
+*.json text

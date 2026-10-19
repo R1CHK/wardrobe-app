@@ -1,0 +1,48 @@
+.page {
+  min-height: 100vh;
+  padding: 44rpx 40rpx 100rpx;
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: "Songti SC", "Noto Serif SC", Georgia, serif;
+  font-size: 44rpx;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 2rpx;
+}
+
+.meta {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: var(--ink3);
+  letter-spacing: 1rpx;
+}
+
+.sec {
+  margin-top: 46rpx;
+}
+
+.h {
+  font-size: 27rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14rpx;
+  letter-spacing: .5rpx;
+}
+
+.p {
+  font-size: 26rpx;
+  color: var(--ink2);
+  line-height: 1.9;
+  margin-bottom: 8rpx;
+}
+
+.foot-note {
+  margin-top: 64rpx;
+  padding-top: 26rpx;
+  border-top: 1rpx solid var(--line);
+  font-size: 22rpx;
+  color: var(--ink3);
+  line-height: 1.8;
+}

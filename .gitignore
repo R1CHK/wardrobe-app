@@ -1,0 +1,19 @@
+# 微信开发者工具生成的本机私有配置
+project.private.config.json
+
+# 依赖与构建产物
+node_modules/
+miniprogram_npm/
+miniprogram/miniprogram_npm/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# 日志
+*.log
+npm-debug.log*

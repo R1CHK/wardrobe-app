@@ -1,0 +1,103 @@
+<view class="page">
+
+  <!-- 照片 -->
+  <view class="block">
+    <view class="block-head">
+      <text class="block-title">照片</text>
+      <text class="block-hint">{{images.length}} / {{maxImages}}</text>
+    </view>
+
+    <view class="photos">
+      <view class="photo" wx:for="{{images}}" wx:key="key">
+        <image class="photo-img" src="{{item.url}}" mode="aspectFill" data-i="{{index}}" bindtap="onPreview" />
+        <view class="photo-del" data-i="{{index}}" catchtap="onRemove">×</view>
+      </view>
+
+      <view class="photo-add" wx:if="{{images.length < maxImages}}" bindtap="onChoose" hover-class="photo-add-hover">
+        <view class="add-bar add-bar-h"></view>
+        <view class="add-bar add-bar-v"></view>
+      </view>
+    </view>
+
+    <view class="block-foot">第一张会作为封面，建议拍正面全貌</view>
+  </view>
+
+  <!-- 品类 -->
+  <view class="block">
+    <view class="block-head">
+      <text class="block-title">品类</text>
+      <text class="block-hint required">必选</text>
+    </view>
+    <view class="chips">
+      <view
+        wx:for="{{categories}}"
+        wx:key="key"
+        class="chip {{category === item.key ? 'on' : ''}}"
+        data-k="{{item.key}}"
+        bindtap="onCategory"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- 季节 -->
+  <view class="block">
+    <view class="block-head">
+      <text class="block-title">季节</text>
+      <text class="block-hint">可多选，不选也行</text>
+    </view>
+    <view class="chips">
+      <view
+        wx:for="{{seasonsList}}"
+        wx:key="key"
+        class="chip {{item.checked ? 'on' : ''}}"
+        data-i="{{index}}"
+        bindtap="onSeason"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="block">
+    <view class="row">
+      <view class="row-label">名称</view>
+      <input
+        class="row-input"
+        placeholder="可以不填，想个名字更好找"
+        placeholder-class="ph"
+        value="{{name}}"
+        maxlength="20"
+        bindinput="onName"
+      />
+    </view>
+
+    <view class="row-divider"></view>
+
+    <view class="row">
+      <view class="row-label">价格</view>
+      <view class="row-price">
+        <text class="yen">¥</text>
+        <input
+          class="row-input"
+          type="digit"
+          placeholder="0"
+          placeholder-class="ph"
+          value="{{price}}"
+          bindinput="onPrice"
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class="tips">只有「一张照片 + 品类」是必填的，其它都可以以后补</view>
+
+</view>
+
+<!-- 底部保存 -->
+<view class="footer">
+  <button
+    class="save-btn {{canSave ? '' : 'disabled'}}"
+    loading="{{saving}}"
+    disabled="{{saving}}"
+    bindtap="onSave"
+  >{{saving ? '保存中' : '保存'}}</button>
+</view>

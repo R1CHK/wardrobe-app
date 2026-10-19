@@ -1,0 +1,142 @@
+.page {
+  min-height: 100vh;
+  padding: 50rpx 24rpx 80rpx;
+  box-sizing: border-box;
+}
+
+/* ---------- 头部 ---------- */
+.profile {
+  text-align: center;
+  padding: 20rpx 0 44rpx;
+}
+
+.avatar {
+  width: 132rpx;
+  height: 132rpx;
+  line-height: 132rpx;
+  margin: 0 auto 24rpx;
+  border-radius: 50%;
+  background: #EDF0E7;
+  color: var(--sage);
+  font-family: "Songti SC", Georgia, serif;
+  font-size: 52rpx;
+  text-align: center;
+}
+
+.pname {
+  font-family: "Songti SC", "Noto Serif SC", Georgia, serif;
+  font-size: 38rpx;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pdesc {
+  margin-top: 8rpx;
+  font-size: 23rpx;
+  color: var(--ink3);
+  letter-spacing: 1rpx;
+}
+
+/* ---------- 统计 ---------- */
+.stats {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1rpx solid var(--line);
+  border-radius: 16rpx;
+  padding: 34rpx 0;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-line {
+  width: 1rpx;
+  height: 56rpx;
+  background: var(--line-soft);
+}
+
+.sv {
+  font-family: "Songti SC", "Noto Serif SC", Georgia, serif;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.sv-yen {
+  font-size: 24rpx;
+  color: var(--ink3);
+  margin-right: 2rpx;
+}
+
+.sl {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--ink3);
+  letter-spacing: 1rpx;
+}
+
+.capped {
+  margin-top: 14rpx;
+  font-size: 21rpx;
+  color: var(--ink3);
+  text-align: right;
+  padding-right: 6rpx;
+}
+
+/* ---------- 菜单 ---------- */
+.menu {
+  margin-top: 30rpx;
+  background: #FFFFFF;
+  border: 1rpx solid var(--line);
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26rpx;
+  height: 100rpx;
+  border-bottom: 1rpx solid var(--line-soft);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-hover {
+  background: #FAF9F5;
+}
+
+.menu-label {
+  font-size: 27rpx;
+  color: var(--ink);
+}
+
+.menu-arrow {
+  font-size: 34rpx;
+  color: #C4C0B4;
+  line-height: 1;
+}
+
+/* ---------- 说明 ---------- */
+.note {
+  margin-top: 34rpx;
+  padding: 0 12rpx;
+  font-size: 22rpx;
+  color: var(--ink3);
+  line-height: 1.8;
+}
+
+.version {
+  margin-top: 60rpx;
+  text-align: center;
+  font-size: 21rpx;
+  color: #B6B3A8;
+  letter-spacing: 1rpx;
+}

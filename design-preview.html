@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线上衣橱 · 界面预览</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+
+  :root {
+    --bg: #F7F6F2;
+    --ink: #1B1B18;
+    --ink2: #48483F;
+    --ink3: #8B8B80;
+    --line: #E2E0D8;
+    --line-soft: #EFEEE8;
+    --sage: #4E6144;
+    --clay: #A5673F;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --serif: "Songti SC", "Noto Serif SC", Georgia, serif;
+  }
+
+  body {
+    background: #EFEDE7;
+    font-family: var(--sans);
+    color: var(--ink);
+    padding: 56px 32px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .head { max-width: 1680px; margin: 0 auto 40px; }
+  .head .kicker {
+    font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--sage); font-weight: 700; margin-bottom: 12px;
+  }
+  .head h1 {
+    font-family: var(--serif); font-size: 32px; font-weight: 600;
+    letter-spacing: -.01em; line-height: 1.3;
+  }
+  .head p {
+    margin-top: 10px; font-size: 13.5px; color: #6D6B62; max-width: 720px; line-height: 1.7;
+  }
+
+  .board {
+    display: flex; flex-wrap: wrap; gap: 44px; justify-content: flex-start;
+    max-width: 1680px; margin: 0 auto;
+  }
+
+  .device { width: 375px; flex: none; }
+
+  .phone {
+    width: 375px; height: 812px; background: var(--bg);
+    border-radius: 38px; overflow: hidden; position: relative;
+    box-shadow: 0 20px 50px rgba(40, 38, 30, .16), 0 2px 6px rgba(40, 38, 30, .08);
+    display: flex; flex-direction: column;
+  }
+
+  .status {
+    height: 44px; flex: none; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 24px 0 30px;
+    font-size: 13px; font-weight: 600; letter-spacing: .2px;
+  }
+  .status .dots { letter-spacing: 2px; font-size: 11px; color: var(--ink2) }
+
+  .navbar {
+    height: 44px; flex: none; display: flex; align-items: center;
+    justify-content: center; font-size: 16px; font-weight: 600;
+  }
+
+  .screen { flex: 1; overflow: hidden; position: relative; }
+
+  /* ---------- 衣橱 ---------- */
+  .hero { padding: 10px 12px 12px; }
+  .hero-eyebrow {
+    font-size: 10px; letter-spacing: 2.5px; color: var(--sage);
+    font-weight: 700; margin-bottom: 7px;
+  }
+  .hero-title {
+    font-family: var(--serif); font-size: 26px; font-weight: 600;
+    letter-spacing: .5px; line-height: 1.25;
+  }
+  .hero-sub { margin-top: 5px; font-size: 12px; color: var(--ink3); }
+
+  .cats {
+    display: flex; gap: 6px; padding: 0 12px 12px;
+    overflow: hidden; white-space: nowrap;
+  }
+  .cat {
+    flex: none; padding: 5px 13px; border-radius: 99px; font-size: 12px;
+    color: var(--ink2); background: #fff; border: 1px solid var(--line);
+  }
+  .cat.on { background: var(--sage); border-color: var(--sage); color: #fff; font-weight: 500 }
+
+  .grid { display: flex; flex-wrap: wrap; padding: 0 12px; }
+  .item { width: 171px; margin-right: 9px; margin-bottom: 14px; }
+  .item:nth-child(2n) { margin-right: 0 }
+  .thumb {
+    width: 171px; height: 200px; border-radius: 7px; position: relative;
+    overflow: hidden;
+  }
+  .thumb::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(255,255,255,.28), rgba(0,0,0,.05));
+  }
+  .t1 { background: linear-gradient(150deg, #E8E3D8, #D3CCBC) }
+  .t2 { background: linear-gradient(150deg, #DCDDD3, #B9BEB0) }
+  .t3 { background: linear-gradient(150deg, #EADFD5, #D6C3B2) }
+  .t4 { background: linear-gradient(150deg, #DADDE1, #B7BDC4) }
+  .t5 { background: linear-gradient(150deg, #EDE7DB, #D9CEB9) }
+  .t6 { background: linear-gradient(150deg, #E2DEDA, #C4BDB4) }
+
+  .price-badge {
+    position: absolute; left: 7px; bottom: 7px; z-index: 2;
+    padding: 1px 6px; border-radius: 4px; background: rgba(27,27,24,.62);
+    color: #fff; font-size: 10px;
+  }
+  .item-title {
+    margin-top: 6px; font-size: 12.5px; color: var(--ink);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .fab {
+    position: absolute; right: 20px; bottom: 20px; width: 54px; height: 54px;
+    border-radius: 50%; background: var(--sage);
+    box-shadow: 0 8px 20px rgba(78,97,68,.34);
+  }
+  .fab::before, .fab::after {
+    content: ""; position: absolute; background: #fff; border-radius: 2px;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  .fab::before { width: 18px; height: 2px }
+  .fab::after { width: 2px; height: 18px }
+
+  /* ---------- tabBar ---------- */
+  .tabbar {
+    height: 62px; flex: none; background: #fff; border-top: 1px solid #ECEAE4;
+    display: flex; padding-bottom: 8px;
+  }
+  .tab {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 3px; font-size: 10px; color: var(--ink3);
+  }
+  .tab.on { color: var(--sage) }
+  .ic-closet {
+    width: 20px; height: 20px; border: 2px solid currentColor; border-radius: 4px;
+    position: relative;
+  }
+  .ic-closet::after {
+    content: ""; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 2px; background: currentColor; transform: translateX(-50%);
+  }
+  .ic-mine { width: 20px; height: 20px; position: relative }
+  .ic-mine::before {
+    content: ""; position: absolute; left: 50%; top: 0; width: 8px; height: 8px;
+    border: 2px solid currentColor; border-radius: 50%; transform: translateX(-50%);
+  }
+  .ic-mine::after {
+    content: ""; position: absolute; left: 50%; bottom: 0; width: 17px; height: 9px;
+    border: 2px solid currentColor; border-bottom: none; border-radius: 9px 9px 0 0;
+    transform: translateX(-50%);
+  }
+
+  /* ---------- 录入 ---------- */
+  .form { padding: 8px 12px 0 }
+  .block {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 13px; margin-bottom: 11px;
+  }
+  .block-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 11px;
+  }
+  .block-title { font-size: 14px; font-weight: 600 }
+  .block-hint { font-size: 11px; color: var(--ink3) }
+  .block-hint.req { color: var(--clay) }
+
+  .photos { display: flex; flex-wrap: wrap }
+  .photo {
+    width: 102px; height: 102px; border-radius: 6px; margin-right: 9px;
+    margin-bottom: 9px; position: relative; overflow: hidden;
+  }
+  .photo .del {
+    position: absolute; top: 3px; right: 3px; width: 20px; height: 20px;
+    border-radius: 50%; background: rgba(27,27,24,.55); color: #fff;
+    font-size: 14px; line-height: 18px; text-align: center;
+  }
+  .photo-add {
+    width: 102px; height: 102px; border-radius: 6px;
+    background: #FAF9F5; border: 1px dashed #D6D3C8; position: relative;
+  }
+  .photo-add::before, .photo-add::after {
+    content: ""; position: absolute; background: #A8A597; border-radius: 2px;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  .photo-add::before { width: 20px; height: 1.5px }
+  .photo-add::after { width: 1.5px; height: 20px }
+
+  .block-foot { margin-top: 6px; font-size: 11px; color: var(--ink3) }
+
+  .chips { display: flex; flex-wrap: wrap; margin-bottom: -7px }
+  .chip {
+    padding: 6px 15px; margin: 0 7px 7px 0; border-radius: 99px;
+    font-size: 12.5px; color: var(--ink2); background: #FAF9F5;
+    border: 1px solid var(--line);
+  }
+  .chip.on { background: var(--sage); border-color: var(--sage); color: #fff; font-weight: 500 }
+
+  .row { display: flex; align-items: center; height: 44px }
+  .row-label { width: 55px; font-size: 13.5px; flex: none }
+  .row-input { flex: 1; font-size: 13.5px; color: #B6B3A8 }
+  .row-input.filled { color: var(--ink) }
+  .row-divider { height: 1px; background: var(--line-soft) }
+  .yen { font-size: 13px; color: var(--ink3); margin-right: 4px }
+
+  .tips { padding: 4px 3px; font-size: 11px; color: var(--ink3) }
+
+  .footer {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 10px 12px 22px; background: rgba(247,246,242,.96);
+    border-top: 1px solid var(--line);
+  }
+  .save {
+    height: 46px; line-height: 46px; text-align: center; border-radius: 6px;
+    background: var(--sage); color: #fff; font-size: 15px; font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* ---------- 详情 ---------- */
+  .gallery { height: 386px; background: linear-gradient(160deg, #E6E1D6, #CFC7B7); position: relative }
+  .dots { position: absolute; bottom: 26px; left: 0; right: 0; display: flex; justify-content: center; gap: 5px }
+  .dots i { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.45); display: block }
+  .dots i.on { background: #fff }
+
+  .body { position: relative; margin-top: -18px; padding: 18px 15px 0; background: var(--bg); border-radius: 14px 14px 0 0 }
+  .title-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px }
+  .d-title { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.35 }
+  .d-price { font-family: var(--serif); font-size: 20px; flex: none }
+  .d-price span { font-size: 13px; color: var(--ink3); margin-right: 1px }
+
+  .rows { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 0 13px }
+  .drow {
+    display: flex; justify-content: space-between; align-items: center;
+    min-height: 46px; border-bottom: 1px solid var(--line-soft); font-size: 13px;
+  }
+  .drow:last-child { border-bottom: none }
+  .drow .k { color: var(--ink3) }
+  .drow .v { color: var(--ink) }
+
+  .actions { display: flex; margin-top: 17px }
+  .act {
+    flex: 1; height: 46px; line-height: 46px; text-align: center;
+    border-radius: 6px; font-size: 13.5px; letter-spacing: .5px;
+  }
+  .act-edit { background: var(--sage); color: #fff; margin-right: 9px }
+  .act-del { border: 1px solid #E7D6C8; color: var(--clay) }
+
+  /* ---------- 我的 ---------- */
+  .profile { text-align: center; padding: 14px 0 22px }
+  .avatar {
+    width: 66px; height: 66px; line-height: 66px; border-radius: 50%;
+    background: #EDF0E7; color: var(--sage); font-family: var(--serif);
+    font-size: 26px; text-align: center; margin: 0 auto 12px;
+  }
+  .pname { font-family: var(--serif); font-size: 19px; font-weight: 600 }
+  .pdesc { margin-top: 4px; font-size: 11.5px; color: var(--ink3); letter-spacing: .5px }
+
+  .stats {
+    display: flex; align-items: center; background: #fff;
+    border: 1px solid var(--line); border-radius: 8px; padding: 17px 0; margin: 0 12px;
+  }
+  .stat { flex: 1; text-align: center }
+  .stat-line { width: 1px; height: 28px; background: var(--line-soft) }
+  .sv { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.2 }
+  .sv small { font-size: 12px; color: var(--ink3) }
+  .sl { margin-top: 4px; font-size: 11px; color: var(--ink3); letter-spacing: .5px }
+
+  .menu {
+    margin: 15px 12px 0; background: #fff; border: 1px solid var(--line);
+    border-radius: 8px; overflow: hidden;
+  }
+  .menu-item {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 50px; padding: 0 13px; border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .menu-item:last-child { border-bottom: none }
+  .menu-item .arrow { color: #C4C0B4; font-size: 17px; line-height: 1 }
+
+  .note { margin: 17px 18px 0; font-size: 11px; color: var(--ink3); line-height: 1.8 }
+  .version { margin-top: 28px; text-align: center; font-size: 10.5px; color: #B6B3A8; letter-spacing: .5px }
+
+  .caption {
+    margin-top: 16px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .caption b { font-size: 13.5px; font-weight: 600 }
+  .caption span { font-size: 11.5px; color: #8A877C }
+
+  @media (max-width: 900px) {
+    body { padding: 32px 16px 60px }
+    .board { gap: 32px; justify-content: center }
+  }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="kicker">Interface Preview</div>
+  <h1>线上衣橱 · 界面预览</h1>
+  <p>
+    静态示意，用来快速看版式与配色；实际渲染以微信开发者工具和真机为准。
+    四个页面构成一条完整闭环：录入 → 浏览 → 详情 → 管理。
+  </p>
+</div>
+
+<div class="board">
+
+  <!-- ============ 1. 衣橱 ============ -->
+  <div class="device">
+    <div class="phone">
+      <div class="status"><span>9:41</span><span class="dots">▮▮▮ ⌁ ▰</span></div>
+      <div class="navbar">我的衣橱</div>
+
+      <div class="screen">
+        <div class="hero">
+          <div class="hero-eyebrow">MY WARDROBE</div>
+          <div class="hero-title">我的衣橱</div>
+          <div class="hero-sub">12 件衣物 · 一件件攒起来的</div>
+        </div>
+
+        <div class="cats">
+          <div class="cat on">全部</div>
+          <div class="cat">上装</div>
+          <div class="cat">下装</div>
+          <div class="cat">连衣裙</div>
+          <div class="cat">外套</div>
+          <div class="cat">鞋</div>
+        </div>
+
+        <div class="grid">
+          <div class="item">
+            <div class="thumb t1"><div class="price-badge">¥399</div></div>
+            <div class="item-title">真丝白衬衫</div>
+          </div>
+          <div class="item">
+            <div class="thumb t2"><div class="price-badge">¥599</div></div>
+            <div class="item-title">黑色西裤</div>
+          </div>
+          <div class="item">
+            <div class="thumb t3"><div class="price-badge">¥1,280</div></div>
+            <div class="item-title">驼色大衣</div>
+          </div>
+          <div class="item">
+            <div class="thumb t4"><div class="price-badge">¥459</div></div>
+            <div class="item-title">灰色针织衫</div>
+          </div>
+          <div class="item">
+            <div class="thumb t5"></div>
+            <div class="item-title">上装</div>
+          </div>
+          <div class="item">
+            <div class="thumb t6"><div class="price-badge">¥899</div></div>
+            <div class="item-title">米色阔腿裤</div>
+          </div>
+        </div>
+
+        <div class="fab"></div>
+      </div>
+
+      <div class="tabbar">
+        <div class="tab on"><div class="ic-closet"></div><span>衣橱</span></div>
+        <div class="tab"><div class="ic-mine"></div><span>我的</span></div>
+      </div>
+    </div>
+    <div class="caption"><b>01 · 衣橱首页</b><span>列表 / 筛选 / 分页</span></div>
+  </div>
+
+  <!-- ============ 2. 录入 ============ -->
+  <div class="device">
+    <div class="phone">
+      <div class="status"><span>9:41</span><span class="dots">▮▮▮ ⌁ ▰</span></div>
+      <div class="navbar">添加衣物</div>
+
+      <div class="screen" style="padding-bottom:96px">
+        <div class="form">
+          <div class="block">
+            <div class="block-head">
+              <span class="block-title">照片</span>
+              <span class="block-hint">2 / 4</span>
+            </div>
+            <div class="photos">
+              <div class="photo t1"><div class="del">×</div></div>
+              <div class="photo t3"><div class="del">×</div></div>
+              <div class="photo-add"></div>
+            </div>
+            <div class="block-foot">第一张会作为封面，建议拍正面全貌</div>
+          </div>
+
+          <div class="block">
+            <div class="block-head">
+              <span class="block-title">品类</span>
+              <span class="block-hint req">必选</span>
+            </div>
+            <div class="chips">
+              <div class="chip on">上装</div>
+              <div class="chip">下装</div>
+              <div class="chip">连衣裙</div>
+              <div class="chip">外套</div>
+              <div class="chip">鞋</div>
+              <div class="chip">包</div>
+              <div class="chip">配饰</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-head">
+              <span class="block-title">季节</span>
+              <span class="block-hint">可多选，不选也行</span>
+            </div>
+            <div class="chips">
+              <div class="chip on">春</div>
+              <div class="chip">夏</div>
+              <div class="chip on">秋</div>
+              <div class="chip">冬</div>
+            </div>
+          </div>
+
+          <div class="block" style="padding-top:4px;padding-bottom:4px">
+            <div class="row">
+              <div class="row-label">名称</div>
+              <div class="row-input filled">真丝白衬衫</div>
+            </div>
+            <div class="row-divider"></div>
+            <div class="row">
+              <div class="row-label">价格</div>
+              <div class="yen">¥</div>
+              <div class="row-input filled">399</div>
+            </div>
+          </div>
+
+          <div class="tips">只有「一张照片 + 品类」是必填的，其它都可以以后补</div>
+        </div>
+
+        <div class="footer">
+          <div class="save">保存</div>
+        </div>
+      </div>
+    </div>
+    <div class="caption"><b>02 · 录入</b><span>拍照 / 表单 / 写库</span></div>
+  </div>
+
+  <!-- ============ 3. 详情 ============ -->
+  <div class="device">
+    <div class="phone">
+      <div class="status"><span>9:41</span><span class="dots">▮▮▮ ⌁ ▰</span></div>
+      <div class="navbar">衣物详情</div>
+
+      <div class="screen">
+        <div class="gallery">
+          <div class="dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+
+        <div class="body">
+          <div class="title-row">
+            <div class="d-title">真丝白衬衫</div>
+            <div class="d-price"><span>¥</span>399</div>
+          </div>
+
+          <div class="rows">
+            <div class="drow"><span class="k">品类</span><span class="v">上装</span></div>
+            <div class="drow"><span class="k">季节</span><span class="v">春 · 秋</span></div>
+            <div class="drow"><span class="k">价格</span><span class="v">¥399 元</span></div>
+            <div class="drow"><span class="k">录入时间</span><span class="v">2026.10.19</span></div>
+          </div>
+
+          <div class="actions">
+            <div class="act act-edit">编辑</div>
+            <div class="act act-del">删除</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption"><b>03 · 详情</b><span>预览 / 编辑 / 删除</span></div>
+  </div>
+
+  <!-- ============ 4. 我的 ============ -->
+  <div class="device">
+    <div class="phone">
+      <div class="status"><span>9:41</span><span class="dots">▮▮▮ ⌁ ▰</span></div>
+      <div class="navbar">我的</div>
+
+      <div class="screen">
+        <div class="profile">
+          <div class="avatar">衣</div>
+          <div class="pname">我的衣橱</div>
+          <div class="pdesc">一个只属于你的私人衣橱</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="sv">12</div><div class="sl">件衣物</div></div>
+          <div class="stat-line"></div>
+          <div class="stat"><div class="sv"><small>¥</small>6,480</div><div class="sl">总价值</div></div>
+          <div class="stat-line"></div>
+          <div class="stat"><div class="sv">6</div><div class="sl">个品类</div></div>
+        </div>
+
+        <div class="menu">
+          <div class="menu-item"><span>隐私政策</span><span class="arrow">›</span></div>
+          <div class="menu-item"><span>关于</span><span class="arrow">›</span></div>
+        </div>
+
+        <div class="note">照片与信息保存在你自己的云开发环境中，只有你能看到。</div>
+        <div class="version">v1.0.0 · 练手项目</div>
+      </div>
+
+      <div class="tabbar">
+        <div class="tab"><div class="ic-closet"></div><span>衣橱</span></div>
+        <div class="tab on"><div class="ic-mine"></div><span>我的</span></div>
+      </div>
+    </div>
+    <div class="caption"><b>04 · 我的</b><span>统计 / 隐私 / 关于</span></div>
+  </div>
+
+</div>
+
+</body>
+</html>
