@@ -54,7 +54,8 @@ wardrobe-app/
 ├── project.config.json
 ├── design-preview.html        ← 界面预览，浏览器直接打开（不参与打包）
 ├── tools/
-│   └── smoke-test.js          ← 逻辑自测，node 跑（不参与打包）
+│   ├── smoke-test.js          ← 逻辑自测，node 跑（不参与打包）
+│   └── gen_icons.py           ← 生成 tabBar 图标（不参与打包）
 └── miniprogram/
     ├── app.js                 云开发初始化
     ├── app.json               页面与 tabBar 配置
